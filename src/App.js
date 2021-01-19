@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import MovieItem from './components/MovieItem';
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 
 function App() {
   const [ isLoading, setIsLoading ] = useState(true);
@@ -64,7 +64,7 @@ function App() {
             className="movie-list"
           >
             {moviesData.map((movie) => (
-              <MovieItem movieInfo={{...movie, posterUrl: `${configData.secure_base_url}w185${movie.poster_path}`}} key={uuidv4()} />
+              <MovieItem movieInfo={{...movie, posterUrl: `${configData.secure_base_url}w185${movie.poster_path}`}} key={movie} />
             ))}
           </InfiniteScroll>
       }
