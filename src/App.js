@@ -45,7 +45,7 @@ function App() {
     <div className="App">
       {isDataLoaded
         ? <MovieList movies={moviesData.results} imgBaseUrl={configData.secure_base_url}/>
-        : <p>Loading...</p>}
+        : <p className="loading-message">Loading...</p>}
     </div>
   );
 }

@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 function MovieList({movies, imgBaseUrl}) {
     return (
-        <ul>
+        <ul className="movie-list">
             {movies.map((movie) => {
                 return <MovieItem movieInfo={{...movie, posterUrl: `${imgBaseUrl}w185${movie.poster_path}`}} key={uuidv4()} />;
             })}
