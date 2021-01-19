@@ -5,7 +5,7 @@ function MovieItem(props) {
 
     return (
         <li className="movie-item">
-            <img width="185px" height="278px" src={posterUrl} alt={title} className="movie-poster"></img>
+            <img width="185px" height="278px" src={posterUrl} alt={title} className="movie-poster" loading="lazy"></img>
             <h2 className="movie-title">{title}</h2>
             <button type="button" className="favorite-button"><Star className="button-icon"/></button>
         </li>
