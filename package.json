@@ -6,6 +6,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-feather": "^2.0.9",
+    "react-infinite-scroll-component": "^5.1.0",
     "react-scripts": "4.0.1",
     "uuid": "^8.3.2"
   },
