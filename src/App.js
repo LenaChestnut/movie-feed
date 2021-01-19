@@ -5,7 +5,9 @@ import { v4 as uuidv4 } from 'uuid';
 
 function App() {
   const [ isLoading, setIsLoading ] = useState(true);
-  const [ moviesData, setMoviesData ] = useState({movies: [], page: 1});
+  const [ moviesData, setMoviesData ] = useState([]);
+  const [ currPage, setCurrPage ] = useState(1);
+  const [ totalPages, setTotalPages ] = useState(null);
   const [ configData, setConfigData ] = useState(null);
   const BASE_URL = 'https://api.themoviedb.org/3/';
   const API_KEY = process.env.REACT_APP_API_KEY;
@@ -36,10 +38,13 @@ function App() {
     (async () => {
       const movies = await getMovies(BASE_URL, API_KEY);
       const configuration = await getConfiguration(BASE_URL, API_KEY);
-      setMoviesData({movies: [...moviesData.movies, ...movies.results], page: movies.page, totalPages: movies.total_pages});
+      setMoviesData([...moviesData, ...movies.results]);
+      setCurrPage(movies.page);
+      setTotalPages(movies.total_pages);
       setConfigData(configuration);
       setIsLoading(false);
     })();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -47,17 +52,20 @@ function App() {
       {isLoading
         ? <p className="loading-message">Loading...</p>
         : <InfiniteScroll
-            dataLength={moviesData.movies.length}
+            dataLength={moviesData.length}
             next={() => {
-              getMovies(BASE_URL, API_KEY, moviesData.page + 1)
-                .then(movies => setMoviesData({...moviesData, movies: [...moviesData.movies, ...movies.results], page: movies.page}));
+              getMovies(BASE_URL, API_KEY, currPage + 1)
+                .then(movies => {
+                  setMoviesData([...moviesData, ...movies.results]);
+                  setCurrPage(movies.page);
+                });
             }}
-            hasMore={moviesData.page < moviesData.totalPages ? true : false}
+            hasMore={currPage < totalPages ? true : false}
             className="movie-list"
           >
-            {moviesData.movies.map((movie) => (
+            {moviesData.map((movie) => (
               <MovieItem movieInfo={{...movie, posterUrl: `${configData.secure_base_url}w185${movie.poster_path}`}} key={uuidv4()} />
-            ))}s
+            ))}
           </InfiniteScroll>
       }
     </div>
