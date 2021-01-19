@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import MovieList from './components/MovieList';
+
 
 function App() {
   const [ isDataLoaded, setIsDataLoaded ] = useState(false);
@@ -12,7 +14,7 @@ function App() {
     try {
       const response = await fetch(url);
       const data = await response.json();
-      return data
+      return data.images;
     } catch (error) {
       console.log(error);
     }
@@ -42,7 +44,7 @@ function App() {
   return (
     <div className="App">
       {isDataLoaded
-        ? <p>Done</p>
+        ? <MovieList movies={moviesData.results} imgBaseUrl={configData.secure_base_url}/>
         : <p>Loading...</p>}
     </div>
   );
