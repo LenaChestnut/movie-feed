@@ -1,7 +1,7 @@
 const BASE_URL = 'https://api.themoviedb.org/3/';
 const API_KEY = process.env.REACT_APP_API_KEY;
 
-async function getConfiguration(baseUrl, key) {
+const configPromise = (async (baseUrl, key) => {
     let url = `${baseUrl}configuration?api_key=${key}&language=ru-RU`;
     try {
         const response = await fetch(url);
@@ -10,9 +10,7 @@ async function getConfiguration(baseUrl, key) {
     } catch (error) {
         console.log(error);
     }
-}
-
-const configPromise = getConfiguration(BASE_URL, API_KEY);
+})(BASE_URL, API_KEY);
   
 async function getMovies(baseUrl, key, page = 1) {
     let url = `${baseUrl}discover/movie?api_key=${key}&language=ru-RU&page=${page}`;
