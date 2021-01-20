@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import GenresDropdown from './GenresDropdown';
 import { BASE_URL, API_KEY, getGenres } from '../utils';
+import GenresDropdown from './GenresDropdown';
+import SortDropdown from './SortDropdown';
 
-function Menu({setFilteredGenres, filteredGenres}) {
+function Menu({setFilteredGenres, filteredGenres, setSortBy, sortBy}) {
     const [ active, setActive ] = useState('');
     const [ genres, setGenres ] = useState([])
 
@@ -34,7 +35,7 @@ function Menu({setFilteredGenres, filteredGenres}) {
             </ul>
             {
                 active === 'genres' ? <GenresDropdown genresInfo={genres} setFilteredGenres={setFilteredGenres} filteredGenres={filteredGenres}></GenresDropdown> :
-                active === 'sort' ? <div className='settings-dropdown sort-dropdown'><p>Text</p></div> :
+                active === 'sort' ? <SortDropdown setSortBy={setSortBy} sortBy={sortBy}></SortDropdown>:
                 null
             }
         </header>

@@ -12,8 +12,8 @@ const configPromise = (async (baseUrl, key) => {
     }
 })(BASE_URL, API_KEY);
   
-async function getMovies(baseUrl, key, page = 1) {
-    const url = `${baseUrl}discover/movie?api_key=${key}&language=ru-RU&page=${page}`;
+async function getMovies(baseUrl, key, sortBy = 'popularity.desc', page = 1) {
+    const url = `${baseUrl}discover/movie?api_key=${key}&language=ru-RU&page=${page}&sort_by=${sortBy}`;
     try {
         const response = await fetch(url);
         const data = await response.json();
