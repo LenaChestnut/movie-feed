@@ -1,5 +1,11 @@
 @import-normalize;
 
+:root {
+	--dark-main: #0f0e17;
+	--background: #fffffe;
+	--light-text: #dadada;
+}
+
 html,
 body,
 ul {
@@ -8,40 +14,92 @@ ul {
 }
 
 body {
-	background-color: #fffffe;
+	background-color: var(--background);
 	font-family: Helvetica, Arial, sans-serif;
+	min-width: 320px;
+}
+
+ul,
+li {
+	list-style: none;
 }
 
 button {
 	background: none;
 	border: none;
 	cursor: pointer;
+	color: white;
 }
 
 a {
-	color: #dadada;
+	color: var(--light-text);
 	text-decoration: none;
 }
 
-.App {
+header {
+	background: var(--dark-main);
+	color: var(--light-text);
+}
+
+.search-settings {
 	display: flex;
-	justify-content: center;
 	margin: auto;
-	padding: 1rem 0;
-	min-width: 300px;
 	width: 90%;
+	justify-content: space-evenly;
+}
+
+.settings-option {
+	font-size: 14px;
+	padding: 1rem;
+	cursor: pointer;
+}
+
+.settings-dropdown {
+	padding: 0 1rem 1rem;
+	display: flex;
+	flex-direction: column;
+}
+
+.genres-dropdown {
+	margin: auto;
+	width: 90%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	border: none;
+}
+
+.genre-option {
+	padding: 0.2rem;
+	margin: 0.5rem;
+}
+
+.genre-option label {
+	margin-left: 5px;
+}
+
+.form-button {
+	margin: auto;
+	padding: 0.5rem 1rem;
+	border: 1px solid var(--light-text);
+	border-radius: 5px;
+	color: var(--light-text);
+	background: none;
 }
 
 .loading-message {
 	font-weight: 700;
-	color: #0f0e17;
+	color: var(--dark-main);
+	text-align: center;
 }
 
 .movie-list {
-	list-style: none;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
+	width: 90%;
+	margin: auto;
+	padding: 1rem;
 }
 
 .movie-item {
@@ -50,8 +108,8 @@ a {
 	width: 185px;
 	margin: 1rem;
 	border-radius: 10px;
-	background-color: #0f0e17;
-	color: #dadada;
+	background-color: var(--dark-main);
+	color: var(--light-text);
 	position: relative;
 }
 
@@ -94,7 +152,7 @@ a {
 }
 
 .card-favorite-button .button-icon {
-	color: #0f0e17;
+	color: var(--dark-main);
 }
 
 .movie-card {
