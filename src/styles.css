@@ -15,6 +15,12 @@ body {
 button {
 	background: none;
 	border: none;
+	cursor: pointer;
+}
+
+a {
+	color: #dadada;
+	text-decoration: none;
 }
 
 .App {
