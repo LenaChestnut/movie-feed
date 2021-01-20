@@ -53,7 +53,6 @@ function App() {
       setTotalPages(movies.total_pages);
       setIsLoading(false);
     })();
-
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filteredGenres]);
 
@@ -76,7 +75,6 @@ function App() {
                 })
             }}
             hasMore={currPage < totalPages ? true : false}
-            initialScrollY="200"
             className="movie-list"
           >
             {moviesData.map((movie) => (
