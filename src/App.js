@@ -64,7 +64,7 @@ function App() {
             className="movie-list"
           >
             {moviesData.map((movie) => (
-              <MovieItem movieInfo={{...movie, posterUrl: `${configData.secure_base_url}w185${movie.poster_path}`}} key={movie} />
+              <MovieItem movieInfo={{...movie, posterUrl: `${configData.secure_base_url}w185${movie.poster_path}`}} key={movie.id} />
             ))}
           </InfiniteScroll>
       }
