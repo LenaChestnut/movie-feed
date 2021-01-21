@@ -5,6 +5,7 @@ import { BASE_URL, API_KEY, getMovieById, configPromise } from '../utils';
 function MovieCard({ match: {params: {id}} }) {
     const [ movieInfo, setMovieInfo ] = useState({});
     const [ imagesInfo, setImagesInfo ] = useState({});
+    const [ favorites, setFavorites ] = useState(JSON.parse(localStorage.getItem('favorites')) || []);
 
     useEffect(() => {
         (async () => {
@@ -27,6 +28,18 @@ function MovieCard({ match: {params: {id}} }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    const handleClick = (e, id) => {
+        if (favorites.indexOf(id) >= 0) {
+            setFavorites(favorites.filter((item) => item !== id));
+        } else {
+            setFavorites([...favorites, id]);
+        }
+    }
+
+    useEffect(() => {
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+    }, [favorites])
+
     return (
         <div className='movie-card'>
             <div className="poster-container">
@@ -41,7 +54,9 @@ function MovieCard({ match: {params: {id}} }) {
             <div className='info-container'>
                 <h1 className='movie-card__title movie-title'>{movieInfo.title}</h1>
                 <h2 className='movie-card__title original-title'>{movieInfo.original_title}</h2>
-                <button type='button' className='card-favorite-button'><Star className='button-icon'/></button>
+                <button type='button' className='card-favorite-button' onClick={(e) => handleClick(e, movieInfo.id)}>
+                    <Star className="button-icon" style={favorites.indexOf(movieInfo.id) >= 0 ? {color: 'rgb(255 248 38)'} : null}/>
+                </button>
                 <h3 className='movie-genres'>
                     Жанр: {movieInfo.genres ? movieInfo.genres.map(genre => genre.name).join(', ') : null }
                 </h3>

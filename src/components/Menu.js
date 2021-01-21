@@ -3,9 +3,9 @@ import { BASE_URL, API_KEY, getGenres } from '../utils';
 import GenresDropdown from './GenresDropdown';
 import SortDropdown from './SortDropdown';
 
-function Menu({setFilteredGenres, filteredGenres, setSortBy, sortBy}) {
+function Menu({ setFilteredGenres, filteredGenres, setSortBy, sortBy }) {
     const [ active, setActive ] = useState('');
-    const [ genres, setGenres ] = useState([])
+    const [ genres, setGenres ] = useState([]);
 
     useEffect(() => {
         (async () => {
@@ -31,7 +31,6 @@ function Menu({setFilteredGenres, filteredGenres, setSortBy, sortBy}) {
             <ul className='search-settings' onClick={(e) => handleClick(e)}>
                 <li className='settings-option genres'>Жанры</li>
                 <li className='settings-option sort'>Сортировать</li>
-                <li className='settings-option'>Избранное</li>
             </ul>
             {
                 active === 'genres' ? <GenresDropdown genresInfo={genres} setFilteredGenres={setFilteredGenres} filteredGenres={filteredGenres}></GenresDropdown> :

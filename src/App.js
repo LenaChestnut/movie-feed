@@ -7,12 +7,13 @@ import { v4 as uuidv4 } from 'uuid';
 
 function App() {
   const [ isLoading, setIsLoading ] = useState(true);
+  const [ sortBy, setSortBy ] = useState('popularity.desc');
   const [ moviesData, setMoviesData ] = useState([]);
   const [ currPage, setCurrPage ] = useState(1);
   const [ totalPages, setTotalPages ] = useState(null);
   const [ configData, setConfigData ] = useState(null);
   const [ filteredGenres, setFilteredGenres ] = useState([]);
-  const [ sortBy, setSortBy ] = useState('popularity.desc');
+  const [ favorites, setFavorites ] = useState(JSON.parse(localStorage.getItem('favorites')) || []);
 
   useEffect(() => {
     (async () => {
@@ -58,6 +59,10 @@ function App() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filteredGenres, sortBy]);
 
+  useEffect(() => {
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+  }, [favorites])
+
   return (
     <div className="App">
       <Menu 
@@ -88,7 +93,9 @@ function App() {
             {moviesData.map((movie) => (
               <MovieItem 
                 movieInfo={{...movie, posterUrl: `${configData.secure_base_url}w185${movie.poster_path}`}}
-                key={uuidv4()} 
+                key={uuidv4()}
+                setFavorites={setFavorites} 
+                favorites={favorites}
               />)
             )}
           </InfiniteScroll>

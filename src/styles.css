@@ -2,7 +2,7 @@
 
 :root {
 	--dark-main: #0f0e17;
-	--background: #fffffe;
+	--background: #fffefe;
 	--light-text: #dadada;
 }
 
@@ -124,8 +124,11 @@ header {
 	order: 1;
 	border-radius: 10px;
 	max-width: 100%;
-	height: 278px;
 	text-align: center;
+}
+
+.movie-poster-background {
+	height: 278px;
 }
 
 .movie-title {
@@ -180,6 +183,8 @@ header {
 
 .info-container {
 	padding: 1.5rem 0;
+	text-align: left;
+	width: 100%;
 }
 
 .movie-genres {
